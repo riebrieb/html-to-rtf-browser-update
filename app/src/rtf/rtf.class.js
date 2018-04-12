@@ -5,7 +5,7 @@ const Table = require('../table/table.class');
 const MyString = require('../string/my-string.class');
 const juice = require('juice');
 const fs = require('fs');
-const charset = require('./src/rtf/charset.module');
+const charset = require('./charset.module');
 
 class Rtf {
     constructor() {
