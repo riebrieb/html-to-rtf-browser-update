@@ -28,10 +28,11 @@ class Style {
     }
 
     static getRtfReferencesInStyleProperty(styleValue) {
-        if (styleValue == '')
+        if (styleValue == '') {
             return undefined;
+        }
 
-        let fictitiousTagWithTruthStyle = "<span style='" + styleValue + "'></span>";
+        let fictitiousTagWithTruthStyle = `<span style="${styleValue}"></span>`;
         let listOfRtfReferences = '';
         let allowedTags = AllowedStyleProperties.getAllowedTags();
 
@@ -45,17 +46,24 @@ class Style {
                         listOfRtfReferences += this.getRtfFontSizeReference($(fictitiousTagWithTruthStyle).css(value.propertyName));
                         break;
                     case 'font-family':
-                        listOfRtfReferences += this.getRtfFontFamilyReference($(fictitiousTagWithTruthStyle).css(value.propertyName));
+                        let _fictitiousTagWithTruthStyle = `<span style="${
+                            styleValue.replace(new RegExp('\'', 'g'), '').split(',')[0]
+                        }"></span>`;
+
+                        listOfRtfReferences += this.getRtfFontFamilyReference($(_fictitiousTagWithTruthStyle).css(value.propertyName));
                         break;
                     case 'text-align':
                         listOfRtfReferences += this.getRtfAlignmentReference($(fictitiousTagWithTruthStyle).css(value.propertyName));
+                        break;
+                    default:
                         break;
                 }
             }
         });
 
-        if (listOfRtfReferences == '')
+        if (listOfRtfReferences == '') {
             return undefined;
+        }
 
         return listOfRtfReferences;
     }
