@@ -27,7 +27,7 @@ describe('RtfTest', () => {
         rtf.addContentOfTagInRtfCode('test test test test');
         rtf.addClosingFatherTagInRtfCode('b');
 
-        should(rtf.buildRtf()).be.equal('{\\rtf\\ansi\\deff0{\\fonttbl {\\f0\\fnil\\fcharset0 ;}}{\\colortbl ;}{\\b test test test test }}');
+        should(rtf.buildRtf()).be.equal('{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat{\\fonttbl{\\f0\\fnil\\fcharset0 Arial;}{\\f1\\fnil\\fcharset0 Arial Black;}{\\f2\\fnil\\fcharset0 Courier New;}{\\f3\\fnil\\fcharset0 Georgia;}{\\f4\\fnil\\fcharset0 Tahoma;}{\\f5\\fnil\\fcharset0 Times New Roman;}{\\f6\\fnil\\fcharset0 Verdana;}}{\\colortbl ;}{\\b test test test test }}');
     });
 
     it('getRtfContentReferences()', () => {
