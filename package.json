@@ -1,43 +1,43 @@
 {
-    "name": "heron-html-to-rtf",
-    "version": "1.4.0",
-    "author": {
-        "name": "Ozires R.S.O.F",
-        "email": "oziresrds@yahoo.com.br"
-    },
-    "maintainers": [
-        {
-            "name": "Heron Silva",
-            "email": "code.heron@outlook.com"
-        }
-    ],
-    "description": "Convert html to rtf format in the server",
-    "readmeFilename": "README.md",
-    "keywords": [
-        "html",
-        "rtf",
-        "convert",
-        "server",
-        "node",
-        "javascript"
-    ],
-    "license": "MIT",
-    "main": "index.js",
-    "dependencies": {
-        "cheerio": "^1.0.0-rc.1",
-        "juice": "^4.1.0"
-    },
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "gulp-mocha": "^4.3.1",
-        "mocha": "^3.4.2",
-        "should": "^11.2.1"
-    },
-    "scripts": {
-        "tests": "gulp tests"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/heronsilva/html-to-rtf.git"
+  "name": "heron-html-to-rtf",
+  "version": "1.4.1",
+  "author": {
+    "name": "Ozires R.S.O.F",
+    "email": "oziresrds@yahoo.com.br"
+  },
+  "maintainers": [
+    {
+      "name": "Heron Silva",
+      "email": "code.heron@outlook.com"
     }
+  ],
+  "description": "Convert html to rtf format in the server",
+  "readmeFilename": "README.md",
+  "keywords": [
+    "html",
+    "rtf",
+    "convert",
+    "server",
+    "node",
+    "javascript"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.1",
+    "juice": "^4.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^4.3.1",
+    "mocha": "^3.4.2",
+    "should": "^11.2.1"
+  },
+  "scripts": {
+    "tests": "gulp tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/heronsilva/html-to-rtf.git"
+  }
 }
