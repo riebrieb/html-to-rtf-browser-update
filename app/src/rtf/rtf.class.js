@@ -8,9 +8,9 @@ const fs = require('fs');
 
 class Rtf {
     constructor() {
-        this.rtfHeaderOpening = "{\\rtf\\ansi\\deff0{\\fonttbl {\\f0\\fnil\\fcharset0 ;}}";
+        this.rtfHeaderOpening = '{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat{\\fonttbl{\\f0\\fnil\\fcharset0 Arial;}{\\f1\\fnil\\fcharset0 Arial Black;}{\\f2\\fnil\\fcharset0 Courier New;}{\\f3\\fnil\\fcharset0 Georgia;}{\\f4\\fnil\\fcharset0 Tahoma;}{\\f5\\fnil\\fcharset0 Times New Roman;}{\\f6\\fnil\\fcharset0 Verdana;}}';
         this.rtfHeaderContent = '';
-        this.rtfClosing = "}";
+        this.rtfClosing = '}';
         this.rtfContentReferences = [];
         this.Table = new Table();
     }
@@ -50,24 +50,24 @@ class Rtf {
     }
 
     // Don't has a test
-    readAllChildsInTag(fatherTag) {
-        if (fatherTag.children != undefined) {
-            this.addOpeningTagInRtfCode(fatherTag.name);
-            this.ifExistsAttributesAddAllReferencesInRtfCode(fatherTag.attribs);
+    readAllChildsInTag(parentTag) {
+        if (parentTag.children != undefined) {
+            this.addOpeningTagInRtfCode(parentTag.name);
+            this.ifExistsAttributesAddAllReferencesInRtfCode(parentTag.attribs);
 
-            if (fatherTag.name.toLowerCase() == 'table') {
-                this.Table.setAmountOfColumns(this.getAmountOfColumnThroughOfFirstChildOfTbodyTag(fatherTag.children));
+            if (parentTag.name.toLowerCase() == 'table') {
+                this.Table.setAmountOfColumns(this.getAmountOfColumnThroughOfFirstChildOfTbodyTag(parentTag.children));
             }
 
-            if (fatherTag.name.toLowerCase() == 'tr') {
+            if (parentTag.name.toLowerCase() == 'tr') {
                 this.addReferenceTagInRtfCode(this.Table.buildCellsLengthOfEachColumn());
             }
 
-            if (fatherTag.name.toLowerCase() == 'mark') {
+            if (parentTag.name.toLowerCase() == 'mark') {
                 this.setHighlightInRtf();
             }
 
-            (fatherTag.children).forEach((child, index) => {
+            (parentTag.children).forEach((child, index) => {
                 if (child.type != 'text') {
                     this.readAllChildsInTag(child);
                 } else {
@@ -76,7 +76,7 @@ class Rtf {
             });
         }
 
-        this.addClosingFatherTagInRtfCode(fatherTag.name);
+        this.addClosingFatherTagInRtfCode(parentTag.name);
     }
 
     getAmountOfColumnThroughOfFirstChildOfTbodyTag(tableChildren) {
