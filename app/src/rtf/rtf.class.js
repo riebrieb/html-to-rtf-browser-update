@@ -5,6 +5,7 @@ const Table = require('../table/table.class');
 const MyString = require('../string/my-string.class');
 const juice = require('juice');
 const fs = require('fs');
+const charset = require('./src/rtf/charset.module');
 
 class Rtf {
     constructor() {
@@ -16,6 +17,10 @@ class Rtf {
     }
 
     convertHtmlToRtf(html) {
+        charset.forEach(c =>
+            html = html.replace(new RegExp(c.htmlEntity, 'g'), c.rtfEscapeChar)
+        );
+
         let $ = cheerio.load(juice(html));
         let treeOfTags = $('html').children();
 
