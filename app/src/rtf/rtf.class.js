@@ -20,6 +20,12 @@ class Rtf {
             html = html.replace(new RegExp(c.htmlEntity, 'g'), c.rtfEscapeChar)
         );
 
+        html = html.replace(/[^\u0000-\u007F]/g, function (element) {
+            // handle based on https://www.zopatista.com/python/2012/06/06/rtf-and-unicode/
+            let char = element.charCodeAt(0)
+            return `\\u${char}?`
+        });
+
         let $ = cheerio.load(juice(html));
         let treeOfTags = $('html').children();
 
