@@ -1,5 +1,5 @@
 # HTML To RTF
->This project convert html to rtf format in the server.
+>This project convert html to rtf format in the browser.
 
 ## Prerequisites
 >This project work with NodeJS in the server side
@@ -7,7 +7,7 @@
 
 ## Installation
 ```
-$ npm install html-to-rtf
+$ npm install wodka/html-to-rtf
 ```
 ## Getting Started
 ```javascript
@@ -37,7 +37,7 @@ var html = `
 	</table>
 </div>
 `
-htmlToRtf.saveRtfInFile('<Path>/<FileName>.rtf', htmlToRtf.convertHtmlToRtf(html))
+htmlToRtf.convertHtmlToRtf(html)
 ```
 
 >  Now test in your preferred text editor (wordpad, word, libreoffice, ...).
