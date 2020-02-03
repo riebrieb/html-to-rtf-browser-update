@@ -24,13 +24,13 @@
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.1",
-    "juice": "^4.1.0"
+    "cheerio": "^1.0.0-rc.3",
+    "juice": "^4.3.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-mocha": "^4.3.1",
-    "mocha": "^3.4.2",
+    "mocha": "^3.5.3",
     "should": "^11.2.1"
   },
   "scripts": {
