@@ -13,7 +13,7 @@ describe('FontSizeTest', () => {
     describe('getRtfFontSizeReference()', () => {
         it('Should return a value in pt', () => {
             should(FontSize.getRtfFontSizeReference('10.5px;')).be.equal('\\fs7');
-            should(FontSize.getRtfFontSizeReference('')).be.undefined();
+            should(FontSize.getRtfFontSizeReference('')).be.equal('');
         });
     });
 });

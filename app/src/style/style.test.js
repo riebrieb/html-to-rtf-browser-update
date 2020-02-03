@@ -42,8 +42,8 @@ describe('StyleTest', () => {
         it('PX', () => {
             should(Style.getRtfFontSizeReference('15px')).be.equal(FONT_SIZE_RTF_REFERENCE + 11);
             should(Style.getRtfFontSizeReference('15px;')).be.equal(FONT_SIZE_RTF_REFERENCE + 11);
-            should(Style.getRtfFontSizeReference('15')).be.undefined();
-            should(Style.getRtfFontSizeReference('')).be.undefined();
+            should(Style.getRtfFontSizeReference('15')).be.equal('');
+            should(Style.getRtfFontSizeReference('')).be.equal('');
         });
     });
 
