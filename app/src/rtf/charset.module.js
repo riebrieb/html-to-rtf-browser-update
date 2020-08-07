@@ -246,5 +246,17 @@ module.exports = [
     {
         htmlEntity: '&yuml;',
         rtfEscapeChar: '\\\'ff'
+    },
+    {
+        htmlEntity: '&nbsp;',
+        rtfEscapeChar: '\\~'
+    },
+    {
+        htmlEntity: '&ordm;',
+        rtfEscapeChar: '\\\'ba'
+    },
+    {
+        htmlEntity: '&deg;',
+        rtfEscapeChar: '\\\'b0'
     }
 ];
