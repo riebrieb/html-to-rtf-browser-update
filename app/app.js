@@ -10,4 +10,4 @@ charset.forEach(c =>
     html = html.replace(new RegExp(c.htmlEntity, 'g'), c.rtfEscapeChar)
 );
 
-htmlToRtf.saveRtfInFile(path.join(__dirname, '../../RDP/olar.rtf'), htmlToRtf.convertHtmlToRtf(html));
+htmlToRtf.saveRtfInFile(path.join(__dirname, '/files/output.rtf'), htmlToRtf.convertHtmlToRtf(html));
