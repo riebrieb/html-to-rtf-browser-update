@@ -3,6 +3,7 @@ const $         = cheerio.load('');
 const Color     = require('../color/color.class');
 const Alignment = require('../alignment/alignment.class');
 const FontSize  = require('../font-size/font-size.class');
+const Sources   = require('../sources/sources.class');
 const AllowedStyleProperties = require('../allowed-style-properties/allowed-style-properties.class');
 
 class Style {
@@ -20,6 +21,10 @@ class Style {
 
   static getRtfFontSizeReference(value) {
     return FontSize.getRtfFontSizeReference(value);
+  }
+
+  static getRtfSourceReference(value) {
+    return Sources.getRtfSourcesReference(value);
   }
 
   static getRtfReferencesInStyleProperty(styleValue) {

@@ -61,6 +61,12 @@ class Rtf {
       if(fatherTag.name.toLowerCase() == 'mark')
         this.setHighlightInRtf();
 
+      if(fatherTag.name.toLowerCase() == 'a') {
+        this.setHrefInRtf(fatherTag);
+        this.setOpenLinkFrameInRtf();
+      }
+
+
       (fatherTag.children).forEach((child, index) => {
         if (child.type != 'text')
           this.readAllChildsInTag(child);
@@ -68,6 +74,10 @@ class Rtf {
           this.addContentOfTagInRtfCode(child.data);
       });
     }
+
+    if(fatherTag.name.toLowerCase() == 'a') 
+      this.setCloseLinkFrameInRtf();
+    
     this.addClosingFatherTagInRtfCode(fatherTag.name);
   }
 
@@ -91,6 +101,8 @@ class Rtf {
       this.addReferenceTagInRtfCode(Style.getRtfReferencesInStyleProperty(attributes.style));
     if(attributes.align != undefined)
       this.addReferenceTagInRtfCode(Style.getRtfAlignmentReference(attributes.align));
+    if(attributes.src != undefined)
+      this.addReferenceTagInRtfCode(Style.getRtfSourceReference(attributes.src));
   }
 
   addReferenceTagInRtfCode(referenceTag) {
@@ -121,6 +133,20 @@ class Rtf {
     let rtfReferenceColor = Style.getRtfReferenceColor('rgb(255, 255, 0)');
     let referenceColorNumber = rtfReferenceColor.match(/[0-9]+/);
     this.addReferenceTagInRtfCode('\\highlight' + referenceColorNumber.toString());
+  }
+
+  setHrefInRtf(tag) {
+    if (tag.attribs.href) {
+      this.addReferenceTagInRtfCode(`{\\*\\fldinst HYPERLINK "${tag.attribs.href}"}`);
+    }
+  }
+
+  setOpenLinkFrameInRtf() {
+    this.addReferenceTagInRtfCode('{\\fldrslt');
+  }
+
+  setCloseLinkFrameInRtf() {
+    this.addReferenceTagInRtfCode('}');
   }
 
   saveRtfInFile(path, value) {

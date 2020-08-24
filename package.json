@@ -5,6 +5,13 @@
     "name": "Ozires R.S.O.F",
     "email": "oziresrds@yahoo.com.br"
   },
+  "contributors": [
+	  {
+		  "email": "ls@visoma.de",
+		  "name": "Leon Strauß",
+		  "url": "https://visoma.de"
+	  }
+  ],
   "description": "Convert html to rtf format in the server",
   "readmeFilename": "README.md",
   "keywords": ["html", "rtf", "convert", "server", "node", "javascript"],
@@ -25,6 +32,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/oziresrds/html-to-rtf.git"
+    "url": "git://https://github.com/MinePlay96/html-to-rtf.git"
   }
 }

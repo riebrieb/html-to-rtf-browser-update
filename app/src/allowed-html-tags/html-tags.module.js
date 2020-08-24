@@ -1,5 +1,12 @@
 module.exports = [
    {
+      opening: 'a',
+      openingRtf: '{\\field',
+      closing: '/a',
+      closingRtf: '}'
+
+   },
+   {
       opening: 'b',
       openingRtf: '{\\b',
       closing: '/b',
@@ -37,37 +44,37 @@ module.exports = [
    },
    {
       opening: 'h1',
-      openingRtf: '{\\pard',
+      openingRtf: '{\\pard\\fs38',
       closing: '/h1',
       closingRtf: '\\sb70\\par}'
    },
    {
       opening: 'h2',
-      openingRtf: '{\\pard',
+      openingRtf: '{\\pard\\fs34',
       closing: '/h2',
       closingRtf: '\\sb70\\par}'
    },
    {
       opening: 'h3',
-      openingRtf: '{\\pard',
+      openingRtf: '{\\pard\\fs30',
       closing: '/h3',
       closingRtf: '\\sb70\\par}'
    },
    {
       opening: 'h4',
-      openingRtf: '{\\pard',
+      openingRtf: '{\\pard\\fs26',
       closing: '/h4',
       closingRtf: '\\sb70\\par}'
    },
    {
       opening: 'h5',
-      openingRtf: '{\\pard',
+      openingRtf: '{\\pard\\fs20',
       closing: '/h5',
       closingRtf: '\\sb70\\par}'
    },
    {
       opening: 'h6',
-      openingRtf: '{\\pard',
+      openingRtf: '{\\pard\\fs16',
       closing: '/h6',
       closingRtf: '\\sb70\\par}'
    },
@@ -179,6 +186,12 @@ module.exports = [
       closing: '/ul',
       closingRtf: '}'
    },
+   {
+      opening: 'img',
+      openingRtf: '{\\pict\\pngblip\\',
+      closing: '/img',
+      closingRtf: '}'
+	 },
    {
       opening: 'html',
       openingRtf: '',
