@@ -130,18 +130,17 @@ class Rtf {
         this.addReferenceTagInRtfCode(AllowedHtmlTags.getRtfReferenceTag(`/${closingFatherTag}`));
     }
 
-    addContentOfTagInRtfCode(contentOfTag) {
-        contentOfTag = MyString.removeCharacterOfEscapeInAllString(contentOfTag, '\n\t');
+    addContentOfTagInRtfCode(content) {
+        content = MyString
+            .removeCharacterOfEscapeInAllString(content, '\n\t')
+            .trim();
 
-        if (contentOfTag != undefined && !MyString.hasOnlyWhiteSpace(contentOfTag))
+        if (content != undefined && !MyString.hasOnlyWhiteSpace(content)) {
             this.rtfContentReferences.push({
-                content: this.addSpaceAroundString(contentOfTag.trim()),
+                content: ` ${content}`,
                 tag: false
             });
-    }
-
-    addSpaceAroundString(contentOfTag) {
-        return ` ${contentOfTag} `;
+        }
     }
 
     setHighlightInRtf() {
