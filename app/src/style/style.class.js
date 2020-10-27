@@ -1,44 +1,49 @@
-const cheerio = require('cheerio');
-const $ = cheerio.load('');
-const Color = require('../color/color.class');
+const cheerio   = require('cheerio');
+const $         = cheerio.load('');
+const Color     = require('../color/color.class');
 const Alignment = require('../alignment/alignment.class');
-const FontSize = require('../font-size/font-size.class');
+const FontSize  = require('../font-size/font-size.class');
+const Sources   = require('../sources/sources.class');
 const FontFamily = require('../font-family/font-family.class');
 const AllowedStyleProperties = require('../allowed-style-properties/allowed-style-properties.class');
 
 class Style {
-    static getRtfReferenceColor(value) {
-        return Color.getRtfReferenceColor(value);
-    }
+  static getRtfReferenceColor(value) {
+    return Color.getRtfReferenceColor(value);
+  }
 
-    static getRtfColorTable() {
-        return Color.getRtfColorTable();
-    }
+  static getRtfColorTable() {
+    return Color.getRtfColorTable();
+  }
 
-    static getRtfAlignmentReference(value) {
-        return Alignment.getRtfAlignmentReference(value);
-    }
+  static getRtfAlignmentReference(value) {
+    return Alignment.getRtfAlignmentReference(value);
+  }
 
     static getRtfFontFamilyReference(value) {
         return FontFamily.getRtfFontFamilyReference(value);
     }
 
-    static getRtfFontSizeReference(value) {
-        return FontSize.getRtfFontSizeReference(value);
-    }
+  static getRtfFontSizeReference(value) {
+    return FontSize.getRtfFontSizeReference(value);
+  }
 
-    static getRtfReferencesInStyleProperty(styleValue) {
+  static getRtfSourceReference(value) {
+    return Sources.getRtfSourcesReference(value);
+  }
+
+  static getRtfReferencesInStyleProperty(styleValue) {
         if (styleValue == '') {
-            return undefined;
+      return undefined;
         }
 
         let fictitiousTagWithTruthStyle = `<span style="${styleValue}"></span>`;
-        let listOfRtfReferences = '';
+    let listOfRtfReferences = '';
         let allowedTags = AllowedStyleProperties.getAllowedTags();
-
+    
         allowedTags.forEach(value => {
-            if ($(fictitiousTagWithTruthStyle).css(value.propertyName) != undefined) {
-                switch (value.propertyName) {
+      if($(fictitiousTagWithTruthStyle).css(value.propertyName) != undefined) {
+        switch(value.propertyName) {
                     case 'color':
                         listOfRtfReferences += this.getRtfReferenceColor($(fictitiousTagWithTruthStyle).css(value.propertyName));
                         break;
@@ -57,16 +62,16 @@ class Style {
                         break;
                     default:
                         break;
-                }
-            }
-        });
+        }
+      }
+    });
 
         if (listOfRtfReferences == '') {
-            return undefined;
+      return undefined;
         }
-
-        return listOfRtfReferences;
-    }
+      
+    return listOfRtfReferences;
+  }
 }
 
 module.exports = Style;

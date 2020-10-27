@@ -5,6 +5,13 @@
     "name": "Ozires R.S.O.F",
     "email": "oziresrds@yahoo.com.br"
   },
+  "contributors": [
+    {
+      "email": "ls@visoma.de",
+      "name": "Leon Strauß",
+      "url": "https://visoma.de"
+    }
+  ],
   "maintainers": [
     {
       "name": "Heron Silva",
