@@ -5,6 +5,7 @@ const Alignment = require('../alignment/alignment.class');
 const FontSize  = require('../font-size/font-size.class');
 const Sources   = require('../sources/sources.class');
 const FontFamily = require('../font-family/font-family.class');
+const TextIndent = require('../text-indent/text-indent.class');
 const AllowedStyleProperties = require('../allowed-style-properties/allowed-style-properties.class');
 
 class Style {
@@ -40,7 +41,7 @@ class Style {
         let fictitiousTagWithTruthStyle = `<span style="${styleValue}"></span>`;
     let listOfRtfReferences = '';
         let allowedTags = AllowedStyleProperties.getAllowedTags();
-    
+
         allowedTags.forEach(value => {
       if($(fictitiousTagWithTruthStyle).css(value.propertyName) != undefined) {
         switch(value.propertyName) {
@@ -60,7 +61,10 @@ class Style {
                     case 'text-align':
                         listOfRtfReferences += this.getRtfAlignmentReference($(fictitiousTagWithTruthStyle).css(value.propertyName));
                         break;
-                    default:
+            case "text-indent":
+                listOfRtfReferences += TextIndent.getRtfReference($(fictitiousTagWithTruthStyle).css(value.propertyName));
+                break;
+            default:
                         break;
         }
       }
@@ -69,7 +73,7 @@ class Style {
         if (listOfRtfReferences == '') {
       return undefined;
         }
-      
+
     return listOfRtfReferences;
   }
 }

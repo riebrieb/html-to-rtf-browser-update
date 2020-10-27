@@ -16,6 +16,10 @@ module.exports = [
         allowed: true
     },
     {
+        propertyName: 'text-indent',
+        allowed: true
+    },
+    {
         propertyName: 'background',
         allowed: false
     }
