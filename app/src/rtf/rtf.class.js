@@ -3,8 +3,8 @@ const Style           = require('../style/style.class');
 const AllowedHtmlTags = require('../allowed-html-tags/allowed-html-tags.class');
 const Table           = require('../table/table.class');
 const MyString        = require('../string/my-string.class');
-const juice 		      = require('juice');
-const charset = require('./charset.module');
+const juice 		  = require('juice');
+const charset         = require('./charset.module');
 
 class Rtf {
   constructor() {
@@ -184,14 +184,6 @@ class Rtf {
 
   setCloseLinkFrameInRtf() {
     this.addReferenceTagInRtfCode('}');
-  }
-
-  saveRtfInFile(path, value) {
-      const fs = require('fs');
-    fs.writeFile(path, value, (err) => {
-      if (err) throw err;
-      console.log('The file has been saved!');
-    });
   }
 
   clearCacheContent() {

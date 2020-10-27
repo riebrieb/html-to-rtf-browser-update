@@ -1,6 +1,6 @@
 {
-  "name": "heron-html-to-rtf",
-  "version": "1.5.0",
+  "name": "html-to-rtf-browser",
+  "version": "1.5.1",
   "author": {
     "name": "Ozires R.S.O.F",
     "email": "oziresrds@yahoo.com.br"
@@ -10,41 +10,45 @@
       "email": "ls@visoma.de",
       "name": "Leon Strauß",
       "url": "https://visoma.de"
-    }
+    },
+      {
+          "name": "Heron Silva",
+          "email": "code.heron@outlook.com"
+      }
   ],
   "maintainers": [
     {
-      "name": "Heron Silva",
-      "email": "code.heron@outlook.com"
+      "name": "Antonio Lucas Neres",
+      "email": "antoniolucasnobar@gmail.com"
     }
   ],
-  "description": "Convert html to rtf format in the server",
+  "description": "Convert html to rtf format in the browser",
   "readmeFilename": "README.md",
   "keywords": [
     "html",
     "rtf",
     "convert",
-    "server",
-    "node",
+    "frontend",
+    "browser",
     "javascript"
   ],
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "juice": "^4.3.2"
+    "juice": "^7.0.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^4.3.1",
-    "mocha": "^3.5.3",
-    "should": "^11.2.1"
+    "gulp": "^4.0.2",
+    "gulp-mocha": "^7.0.2",
+    "mocha": "^8.2.0",
+    "should": "^13.2.3"
   },
   "scripts": {
     "tests": "gulp tests"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/wodka/html-to-rtf.git"
+    "url": "git://github.com/antoniolucasnobar/html-to-rtf-browser.git"
   }
 }
