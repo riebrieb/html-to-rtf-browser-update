@@ -3,57 +3,23 @@ const Rtf     = require('./rtf.class');
 const Style   = require('../style/style.class');
 const Color   = require('../color/color.class');
 const fs 			= require('fs');
+const path = require('path');
+const charset = require('../../src/rtf/charset.module');
 
 describe('RtfTest', () => {
   it('convertHtmlToRtf()', () => {
-    var html = `
-    <html>
-    <head>
-      <style>
-        .test {
-          color: rgb(20, 20, 20);
-          background:#333;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>Title <span style="color:rgb(255,0,0);">with</span> tag h1<h1>
-      <div id="content">
         <p style="color:#333; margin:5px;" class="test" align="center">text of p<b>start b <i>italic with  bold</i>final text of b</b><i>italic</i>final text of p</p>
         <p style="color:rgb(255,0,0);" align="right">red paragraph => right with tag</p>
         <p style="color:rgb(0,0,255); text-align:center;">blue paragraph => center with style</p>
-        <table>
-            <tbody>
-              <tr>
-                <td>
-                  column 1
-                </td>
-                <td>
-                  column 2
-                </td>
-                <td>
-                  column 3
-                </td>
-                <td>
-                  column 4
-                </td>
-              </tr>
-              <tr>
-                <td>content 1</td>
-                <td>content 2<br></td>
-                <td>content 3<br></td>
-                <td>content 4<br></td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
-    </body>
-  </html>`;
+        let rtf = new Rtf();
+        let rtfTest = fs.readFileSync(path.join(__dirname, '/../../files/output.rtf'), 'utf8');
+        let html = fs.readFileSync(path.join(__dirname, '/../../files/input.html'), 'utf8');
 
-    let rtf = new Rtf();
-    let rtfTest = fs.readFileSync(__dirname + '/rtf-test.rtf', 'utf8');
+        charset.forEach(c =>
+            html = html.replace(new RegExp(c.htmlEntity, 'g'), c.rtfEscapeChar)
+        );
 
-    should(rtf.convertHtmlToRtf(html)).be.equal(rtfTest);
+        // should(rtf.convertHtmlToRtf(html)).be.equal(rtfTest);
   });
 
   it('convertHtmlToRtf() With stranger tag: <mytag></mytag>', () => {
@@ -88,7 +54,7 @@ describe('RtfTest', () => {
     rtf.addContentOfTagInRtfCode('test test test test');
     rtf.addClosingFatherTagInRtfCode('b');
 
-    should(rtf.buildRtf()).be.equal('{\\rtf1\\ansi\\deff0{\\fonttbl {\\f0\\fnil\\fcharset0 Calibri;}{\\f1\\fnil\\fcharset2 Symbol;}}{\\colortbl ;}{\\b test test test test }}');
+        should(rtf.buildRtf()).be.equal('{\\rtf1\\ansi\\ansicpg1252\\deff0\\nouicompat{\\fonttbl{\\f0\\fnil\\fcharset0 Arial;}{\\f1\\fnil\\fcharset0 Arial Black;}{\\f2\\fnil\\fcharset0 Courier New;}{\\f3\\fnil\\fcharset0 Georgia;}{\\f4\\fnil\\fcharset0 Tahoma;}{\\f5\\fnil\\fcharset0 Times New Roman;}{\\f6\\fnil\\fcharset0 Verdana;}}{\\colortbl ;}{\\b test test test test}}');
   });
 
   it('getRtfContentReferences()', () => {
@@ -143,6 +109,7 @@ describe('RtfTest', () => {
     rtf.addClosingFatherTagInRtfCode('dd');
     rtf.addOpeningTagInRtfCode('form');
     rtf.addClosingFatherTagInRtfCode('form');
+
     should(rtf.rtfContentReferences).be.length(0);
   });
 
@@ -150,6 +117,7 @@ describe('RtfTest', () => {
     let rtf = new Rtf();
     
     rtf.addOpeningTagInRtfCode('p');
+
     should(rtf.rtfContentReferences[0].content).be.equal('{\\pard');
     should(rtf.rtfContentReferences[0].tag).be.true();
   });
@@ -158,6 +126,7 @@ describe('RtfTest', () => {
     let rtf = new Rtf();
     
     rtf.addClosingFatherTagInRtfCode('p');
+
     should(rtf.rtfContentReferences[0].content).be.equal('\\sb70\\par}');
     should(rtf.rtfContentReferences[0].tag).be.true();
   });
@@ -172,11 +141,6 @@ describe('RtfTest', () => {
     rtf.addContentOfTagInRtfCode('string \nof test\t');
     should(rtf.rtfContentReferences[1].content).be.equal(' string of test ');
     should(rtf.rtfContentReferences[1].tag).be.false();
-  });
-
-  it('addSpaceAroundString()', () => {
-    let rtf = new Rtf();
-    should(rtf.addSpaceAroundString('string of test')).be.equal(' string of test ');
   });
 
   it('swapHtmlStrangerTags()', () => {
