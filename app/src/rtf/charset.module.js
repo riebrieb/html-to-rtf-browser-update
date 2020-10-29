@@ -258,5 +258,9 @@ module.exports = [
     {
         htmlEntity: '&deg;',
         rtfEscapeChar: '\\\'b0'
+    },
+    {
+        htmlEntity: '\u200B',
+        rtfEscapeChar: ''
     }
 ];
