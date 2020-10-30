@@ -1,17 +1,25 @@
 # HTML To RTF
->This project convert html to rtf format in the browser.
+>This project convert html to rtf format in the browser. It is based on the oziresrds/html-to-rtf awesome project.
+>I looked into the 20+ forks to try get the best parts glued to in one place. This could be called html-to-rtf-frankenstein lol.
+
+> Highlight for the developers:
+* Ozires for the base framework. Without him, we would not have this.
+* Heron Silva for several improvements (as font-family support) (heronsilva / html-to-rtf)
+* wodka for making it possible to use in browser (wodka/html-to-rtf).
+* Leon Strauß for image support (MinePlay96/html-to-rtf).
+
+If I missed some functionality in other forks, please let me know, or make a PR.
 
 ## Prerequisites
->This project work with NodeJS in the server side
-[NodeJS]: <https://nodejs.org>
+>This project work in the browser (maybe it works on the server side, but this is not the main goal.
 
 ## Installation
 ```
-$ npm install wodka/html-to-rtf
+$ npm install html-to-rtf-browser
 ```
 ## Getting Started
 ```javascript
-var htmlToRtf = require('html-to-rtf');
+var htmlToRtf = require('html-to-rtf-browser');
 var html = `
 <h1>Title <span style="color:rgb(255,0,0);">with</span> tag h1<h1>
 <div>
@@ -39,8 +47,12 @@ var html = `
 </div>
 `
 htmlToRtf.convertHtmlToRtf(html)
-```
+// from here on, works on browser
+const blob = new Blob([rtf], {type: "application/rtf;charset=utf-8"});
+const link=window.URL.createObjectURL(blob);
+window.location=link;
 
+```
 >  Now test in your preferred text editor (wordpad, word, libreoffice, ...).
 ##
 
@@ -49,15 +61,17 @@ htmlToRtf.convertHtmlToRtf(html)
 > You can't copy the output of terminal.
 > Save the output at a file.rtf
 
+Ex.: 
+
 ### Allowed html tags
 ```html
 <b>, <br>, <center>, <div>, <em>, <font>, <h1>, <h2>, <h3>, <h4>,
 <h5>, <h6>, <i>, <li>, <mark>, <p>, <ol>, <s>, <span>, <sub>, <sup>,
-<strong>, <table>, <td>, <th>, <tr>, <u>, <ul>
+<strong>, <table>, <td>, <th>, <tr>, <u>, <ul>, <img> (base64), <a>
 ```
 ### Allowed style properties
 
-> color(Hex and Rgb), font-size(px), text-align
+> color(Hex and Rgb), font-family, font-size(px/pt), text-align, text-indent (px/cm), margin-left (px/cm), padding-left (px/cm)
 
 
 ## Running the tests
@@ -67,7 +81,7 @@ $ gulp tests
 
 ## Author
 
-> * **Ozires R.S.O.F**
+> * **antoniolucasnobar**
 
 ## License
 This project is licensed under the MIT License
