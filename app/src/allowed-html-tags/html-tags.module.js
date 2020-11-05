@@ -32,7 +32,7 @@ module.exports = [
    },
    {
       opening: 'em',
-      openingRtf: '{\\b',
+      openingRtf: '{\\i',
       closing: '/em',
       closingRtf: '}'
    },
