@@ -12,6 +12,22 @@ module.exports = [
         allowed: true
     },
     {
+        propertyName: 'margin-left',
+        allowed: true
+    },
+    {
+        propertyName: 'margin-right',
+        allowed: true
+    },
+    {
+        propertyName: 'padding-left',
+        allowed: true
+    },
+    {
+        propertyName: 'padding-right',
+        allowed: true
+    },
+    {
         propertyName: 'text-align',
         allowed: true
     },
