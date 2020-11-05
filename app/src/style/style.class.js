@@ -1,32 +1,13 @@
 const cheerio   = require('cheerio');
 const $         = cheerio.load('');
 const Color     = require('../color/color.class');
-const Alignment = require('../alignment/alignment.class');
-const FontSize  = require('../font-size/font-size.class');
 const Sources   = require('../sources/sources.class');
-const FontFamily = require('../font-family/font-family.class');
-const Indentation = require('../indentation/indentation.class');
 const AllowedStyleProperties = require('../allowed-style-properties/allowed-style-properties.class');
 
 class Style {
-  static getRtfReferenceColor(value) {
-    return Color.getRtfReferenceColor(value);
-  }
 
   static getRtfColorTable() {
     return Color.getRtfColorTable();
-  }
-
-  static getRtfAlignmentReference(value) {
-    return Alignment.getRtfAlignmentReference(value);
-  }
-
-    static getRtfFontFamilyReference(value) {
-        return FontFamily.getRtfFontFamilyReference(value);
-    }
-
-  static getRtfFontSizeReference(value) {
-    return FontSize.getRtfFontSizeReference(value);
   }
 
   static getRtfSourceReference(value) {
@@ -34,7 +15,7 @@ class Style {
   }
 
     static getRtfReferencesInStyleProperty(styleValue) {
-        if (styleValue == '') {
+        if (styleValue === '') {
             return undefined;
         }
 
@@ -43,46 +24,17 @@ class Style {
         let allowedTags = AllowedStyleProperties.getAllowedTags();
 
         allowedTags.forEach(value => {
-            if ($(fictitiousTagWithTruthStyle).css(value.propertyName) != undefined) {
-                switch (value.propertyName) {
-                    case 'color':
-                        listOfRtfReferences += this.getRtfReferenceColor($(fictitiousTagWithTruthStyle).css(value.propertyName));
-                        break;
-                    case 'font-size':
-                        listOfRtfReferences += this.getRtfFontSizeReference($(fictitiousTagWithTruthStyle).css(value.propertyName));
-                        break;
-                    case 'font-family':
-                        let _fictitiousTagWithTruthStyle = `<span style="${
-                            styleValue.replace(new RegExp('\'', 'g'), '').split(',')[0]
-                        }"></span>`;
-
-                        listOfRtfReferences += this.getRtfFontFamilyReference($(_fictitiousTagWithTruthStyle).css(value.propertyName));
-                        break;
-                    case 'text-align':
-                        listOfRtfReferences += this.getRtfAlignmentReference($(fictitiousTagWithTruthStyle).css(value.propertyName));
-                        break;
-                    case 'padding-left':
-                        listOfRtfReferences += Indentation.getRtfReference($(fictitiousTagWithTruthStyle).css(value.propertyName), value.propertyName);
-                        break;
-                    case 'margin-left':
-                        listOfRtfReferences += Indentation.getRtfReference($(fictitiousTagWithTruthStyle).css(value.propertyName), value.propertyName);
-                        break;
-                    case 'padding-right':
-                        listOfRtfReferences += Indentation.getRtfReference($(fictitiousTagWithTruthStyle).css(value.propertyName), value.propertyName);
-                        break;
-                    case 'margin-right':
-                        listOfRtfReferences += Indentation.getRtfReference($(fictitiousTagWithTruthStyle).css(value.propertyName), value.propertyName);
-                        break;
-                    case "text-indent":
-                        listOfRtfReferences += Indentation.getRtfReference($(fictitiousTagWithTruthStyle).css(value.propertyName), value.propertyName);
-                        break;
-                    default:
-                        break;
+            if ($(fictitiousTagWithTruthStyle).css(value.propertyName) !== undefined) {
+                if (value.transform !== undefined) {
+                    const styleTag = value.getSpecificStyleTag !== undefined ?
+                        value.getSpecificStyleTag(styleValue) :
+                        fictitiousTagWithTruthStyle;
+                    listOfRtfReferences += value.transform($(styleTag).css(value.propertyName));;
                 }
             }
         });
 
-        if (listOfRtfReferences == '') {
+        if (listOfRtfReferences === '') {
             return undefined;
         }
 

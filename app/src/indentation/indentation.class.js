@@ -12,8 +12,9 @@ const INDENT_RTF_REFERENCE =
 
 class Indentation {
     static getRtfReference(value, command) {
-        console.log(value, command)
-        if (!value || !INDENT_RTF_REFERENCE[command]) {
+        const rtfReference = INDENT_RTF_REFERENCE[command];
+
+        if (!value || !rtfReference) {
             return "";
         }
 
@@ -23,10 +24,8 @@ class Indentation {
 
         value = value.toLowerCase();
 
-        const rtfReference = INDENT_RTF_REFERENCE[command];
-
         const multiplier = this.getMultiplier(value);
-        console.log(multiplier)
+
         if (multiplier === undefined) {
             return "";
         }
