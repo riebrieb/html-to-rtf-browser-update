@@ -3,6 +3,7 @@ const Color     = require('../color/color.class');
 const FontFamily = require('../font-family/font-family.class');
 const FontSize  = require('../font-size/font-size.class');
 const Indentation = require('../indentation/indentation.class');
+const LineHeight = require('../line-height/line-height.class');
 
 module.exports = [
     {
@@ -24,6 +25,11 @@ module.exports = [
             .replace(new RegExp('\'', 'g'), '')
             .split(',')[0]}"></span>`
 
+    },
+    {
+        propertyName: 'line-height',
+        allowed: true,
+        transform:  value => LineHeight.getRtfReference(value)
     },
     {
         propertyName: 'margin-left',

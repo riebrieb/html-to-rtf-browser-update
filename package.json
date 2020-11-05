@@ -1,25 +1,23 @@
 {
   "name": "html-to-rtf-browser",
-  "version": "1.5.1",
+  "version": "1.6.0-alfa-1",
   "author": {
-    "name": "Ozires R.S.O.F",
-    "email": "oziresrds@yahoo.com.br"
+    "name": "Antonio Lucas Neres",
+    "email": "antoniolucasnobar@gmail.com"
   },
   "contributors": [
+    {
+      "name": "Ozires R.S.O.F",
+      "email": "oziresrds@yahoo.com.br"
+    },
     {
       "email": "ls@visoma.de",
       "name": "Leon Strauß",
       "url": "https://visoma.de"
     },
-      {
-          "name": "Heron Silva",
-          "email": "code.heron@outlook.com"
-      }
-  ],
-  "maintainers": [
     {
-      "name": "Antonio Lucas Neres",
-      "email": "antoniolucasnobar@gmail.com"
+      "name": "Heron Silva",
+      "email": "code.heron@outlook.com"
     }
   ],
   "description": "Convert html to rtf format in the browser",
