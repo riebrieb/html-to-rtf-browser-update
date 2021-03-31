@@ -8,6 +8,10 @@ var alignmentReferenceList = [
         reference: '\\ql'
     },
     {
+        name: 'start',
+        reference: '\\ql'
+    },
+    {
         name: 'right',
         reference: '\\qr'
     },

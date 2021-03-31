@@ -17,7 +17,7 @@ class Color {
             return this.getColorInColorTable(this.convertColorInHexToRgb(color));
         }
 
-        return undefined;
+        return this.getColorInColorTable(this.convertColorInHexToRgb('#000000'));;
     }
 
     static getRgbValues(color) {
