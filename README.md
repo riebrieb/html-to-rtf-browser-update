@@ -46,7 +46,7 @@ var html = `
 	</table>
 </div>
 `
-htmlToRtf.convertHtmlToRtf(html)
+const rtf = htmlToRtf.convertHtmlToRtf(html)
 // from here on, works on browser
 const blob = new Blob([rtf], {type: "application/rtf;charset=utf-8"});
 const link=window.URL.createObjectURL(blob);
