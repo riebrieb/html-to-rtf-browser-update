@@ -1,0 +1,13 @@
+.idea
+.vscode
+*.rtf
+.babelrc
+.editorconfig
+gulpfile.js
+webpack.config.js
+dist
+app/app.js
+*.test.js
+app/files
+examples
+*tgz

@@ -3,7 +3,7 @@ class MyString {
         let listOfEscape = this.removeCharacterOfEscapeNotAllowed(stringOfEscape);
         let newstringValue = '';
 
-        if (listOfEscape == undefined) {
+        if (listOfEscape === undefined) {
             return stringValue;
         }
 
@@ -17,7 +17,7 @@ class MyString {
     }
 
     static convertOneCharInHexToDec(value) {
-        if (value.length != 1) {
+        if (value.length !== 1) {
             return undefined;
         }
 
@@ -67,14 +67,19 @@ class MyString {
                 newStringOfEscape.push(elem);
             }
         });
-
         return newStringOfEscape.length > 0 ? newStringOfEscape : undefined;
     }
 
     static hasOnlyWhiteSpace(content) {
-        return (content.replace(/\s/g, '').length == 0) ? true : false;
+        return ( content.replace( /\s/g, '' ).length === 0 );
     }
 
+    static findTextBetween( fullString, first, second ) {
+        const preIndex = fullString.indexOf( first );
+        const firstIndex = preIndex + first.length;
+        const endIndex = firstIndex + fullString.substring( firstIndex ).indexOf( second );
+        return fullString.substring( firstIndex, endIndex );
+    }
 }
 
 module.exports = MyString;

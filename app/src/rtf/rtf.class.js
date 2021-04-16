@@ -1,4 +1,6 @@
 const cheerio         = require('cheerio');
+const Alignment   = require('../alignment/alignment.class');
+const Color     = require('../color/color.class');
 const Style           = require('../style/style.class');
 const AllowedHtmlTags = require('../allowed-html-tags/allowed-html-tags.class');
 const Table           = require('../table/table.class');
@@ -69,28 +71,28 @@ class Rtf {
 
   // Don't has a test
     readAllChildsInTag(parentTag) {
-        if (parentTag.children != undefined) {
+        if (parentTag.children !== undefined) {
             this.addOpeningTagInRtfCode(parentTag.name);
             this.ifExistsAttributesAddAllReferencesInRtfCode(parentTag.attribs);
 
-            if (parentTag.name.toLowerCase() == 'table') {
+            if (parentTag.name.toLowerCase() === 'table') {
                 this.Table.setAmountOfColumns(this.getAmountOfColumnThroughOfFirstChildOfTbodyTag(parentTag.children));
             }
 
-            if (parentTag.name.toLowerCase() == 'tr') {
+            if (parentTag.name.toLowerCase() === 'tr') {
                 this.addReferenceTagInRtfCode(this.Table.buildCellsLengthOfEachColumn());
             }
 
-            if (parentTag.name.toLowerCase() == 'mark') {
+            if (parentTag.name.toLowerCase() === 'mark') {
                 this.setHighlightInRtf();
             }
-            if (parentTag.name.toLowerCase() == 'a') {
+            if (parentTag.name.toLowerCase() === 'a') {
                 this.setHrefInRtf(parentTag);
                 this.setOpenLinkFrameInRtf();
             }
 
-            (parentTag.children).forEach((child, index) => {
-                if (child.type != 'text') {
+            (parentTag.children).forEach((child) => {
+                if (child.type !== 'text') {
                     this.readAllChildsInTag(child);
                 } else {
                     this.addContentOfTagInRtfCode(child.data);
@@ -98,19 +100,19 @@ class Rtf {
             });
         }
 
-        if (parentTag.name.toLowerCase() == 'a') {
+        if (parentTag.name.toLowerCase() === 'a') {
             this.setCloseLinkFrameInRtf();
         }
         this.addClosingFatherTagInRtfCode(parentTag.name);
     }
   getAmountOfColumnThroughOfFirstChildOfTbodyTag(tableChildren) {
     let count = 0;
-    let tbodyIndex = tableChildren.findIndex(value => value.name == 'tbody');
+    let tbodyIndex = tableChildren.findIndex(value => value.name === 'tbody');
 
     for(let i = 0; i < tableChildren[tbodyIndex].children.length; i++) {
-      if(tableChildren[tbodyIndex].children[i].type != 'text') {
-        (tableChildren[tbodyIndex].children[i].children).forEach((child, index) => {
-                    if (child.type != 'text') {
+      if(tableChildren[tbodyIndex].children[i].type !== 'text') {
+        (tableChildren[tbodyIndex].children[i].children).forEach((child) => {
+                    if (child.type !== 'text') {
             count++;
                     }
         });
@@ -123,20 +125,20 @@ class Rtf {
   }
 
   ifExistsAttributesAddAllReferencesInRtfCode(attributes) {
-        if (attributes.style != undefined) {
+        if (attributes.style !== undefined) {
       this.addReferenceTagInRtfCode(Style.getRtfReferencesInStyleProperty(attributes.style));
         }
 
-        if (attributes.align != undefined) {
-      this.addReferenceTagInRtfCode(Style.getRtfAlignmentReference(attributes.align));
+        if (attributes.align !== undefined) {
+      this.addReferenceTagInRtfCode(Alignment.getRtfAlignmentReference(attributes.align));
     }
-    if(attributes.src != undefined) {
+    if(attributes.src !== undefined) {
       this.addReferenceTagInRtfCode(Style.getRtfSourceReference(attributes.src));
   }
     }
 
   addReferenceTagInRtfCode(referenceTag) {
-        if (referenceTag != undefined) {
+        if (referenceTag !== undefined) {
             this.rtfContentReferences.push({
                 content: referenceTag,
                 tag: true
@@ -157,7 +159,7 @@ class Rtf {
             .removeCharacterOfEscapeInAllString(content, '\n\t')
             .trim();
 
-        if (content != undefined && !MyString.hasOnlyWhiteSpace(content)) {
+        if (content !== undefined && !MyString.hasOnlyWhiteSpace(content)) {
             this.rtfContentReferences.push({
                 content: ` ${content}`,
                 tag: false
@@ -166,7 +168,7 @@ class Rtf {
   }
 
   setHighlightInRtf() {
-    let rtfReferenceColor = Style.getRtfReferenceColor('rgb(255, 255, 0)');
+    let rtfReferenceColor = Color.getRtfReferenceColor('rgb(255, 255, 0)');
     let referenceColorNumber = rtfReferenceColor.match(/[0-9]+/);
 
     this.addReferenceTagInRtfCode('\\highlight' + referenceColorNumber.toString());

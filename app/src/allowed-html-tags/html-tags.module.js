@@ -188,7 +188,7 @@ module.exports = [
    },
    {
       opening: 'img',
-      openingRtf: '{\\pict\\pngblip\\',
+      openingRtf: '{\\pict',
       closing: '/img',
       closingRtf: '}'
 	 },

@@ -19,9 +19,13 @@ $ npm install html-to-rtf-browser
 ```
 ## Getting Started
 ```javascript
-var htmlToRtf = require('html-to-rtf-browser');
+const HtmlToRtfBrowser = require('html-to-rtf-browser');
+var htmlToRtf = new HtmlToRtfBrowser();
 var html = `
 <h1>Title <span style="color:rgb(255,0,0);">with</span> tag h1<h1>
+<p> start of an image: </p>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABdCAAAAAAeDx7VAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxIAAAsSAdLdfvwAAAGxSURBVFjD7dctdsMwDABgQcPCwMDCwsHAwsLCwcLeoLBHCMwRDAsHB3uMHCFQs52sP4llW7H33oDEmtZf/WxZcgD/IEBQQQUVVFBBOaFrqLvCaK8AQGWgt9oA7/MaH50y0ApcqNkj7flpOjqab/MyH/fen3LQhEf/ATUbXbdmc5quIHqeFvVlq/LR4fNXLYg+2Of+T3+yOFNZJ0rBMnez0asnd7NRKgQVVFBBw3Fr2vKouThciqO2RyWqjB61t+W4L4uOqrquQV/7+lw9WDVhrgu08lwNH6GVt3tGUaqXj3H2ds9MFPUO4lmwEFR0iJ1tHdwv8A0Jqy4L4M5B3ZDQiOn6c+CgODTmfjyEV+AeXnnwj9h+h9ULc6aIJ7tmKSeHg2K3MepXYRT7D5M1A5OKodhvfC9diyAKBbWJXVL1JAoFmRmHFJXILBJ1hyCmctGUo8VH3dEKpThiy0fd0Qo1Jfu2f+SiaAuH6sivTUHbeZM5iLqmRK9r5X/bj3ZTvQVoiBXoyVIVa9F3IFudqTu7dehYsqjQK9Gp1Xljj2tRfL6DzuI45KDcEFRQQQUVtEz8AL3L59EiRcoBAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTA4LTIxVDA5OjE3OjE0KzAyOjAwSUJYdgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0wOC0yMVQwOToxNzoxNCswMjowMDgf4MoAAAAASUVORK5CYII="></img>
+<p> end of an image</p>
 <div>
 	<p style="color:#333; margin:5px;" class="test" align="center">
 	    text of paragraph <b>text with bold <i>text with italic and bold</i></b><i>text with italic</i>
@@ -47,7 +51,7 @@ var html = `
 </div>
 `
 const rtf = htmlToRtf.convertHtmlToRtf(html)
-// from here on, works on browser
+// from here on, works only on browser
 const blob = new Blob([rtf], {type: "application/rtf;charset=utf-8"});
 const link=window.URL.createObjectURL(blob);
 window.location=link;
@@ -58,16 +62,14 @@ window.location=link;
 
 ##### Important:
 #
-> You can't copy the output of terminal.
-> Save the output at a file.rtf
-
-Ex.: 
+> You can't copy the output of terminal or console.
+> Save the output at a file.rtf. See above for an example
 
 ### Allowed html tags
 ```html
 <b>, <br>, <center>, <div>, <em>, <font>, <h1>, <h2>, <h3>, <h4>,
 <h5>, <h6>, <i>, <li>, <mark>, <p>, <ol>, <s>, <span>, <sub>, <sup>,
-<strong>, <table>, <td>, <th>, <tr>, <u>, <ul>, <img> (base64), <a>
+<strong>, <table>, <td>, <th>, <tr>, <u>, <ul>, <a>, <img> (PNG, JPG in base64 - experimental support to BMP)
 ```
 ### Allowed style properties
 

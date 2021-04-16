@@ -1,6 +1,6 @@
 {
   "name": "html-to-rtf-browser",
-  "version": "1.6.0-alfa-1",
+  "version": "1.6.0-alfa.1",
   "author": {
     "name": "Antonio Lucas Neres",
     "email": "antoniolucasnobar@gmail.com"
@@ -25,25 +25,31 @@
   "keywords": [
     "html",
     "rtf",
+    "document",
+    "rich text",
     "convert",
     "frontend",
     "browser",
     "javascript"
   ],
   "license": "MIT",
-  "main": "index.js",
+  "private": true,
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "juice": "^7.0.0"
+    "cheerio": "^1.0.0-rc.6",
+    "juice": "^7.0.0",
+    "stream": "0.0.2"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-mocha": "^7.0.2",
     "mocha": "^8.2.0",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "tests": "gulp tests"
+    "tests": "gulp tests",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
