@@ -33,7 +33,6 @@
     "javascript"
   ],
   "license": "MIT",
-  "private": true,
   "dependencies": {
     "cheerio": "^1.0.0-rc.6",
     "juice": "^7.0.0",

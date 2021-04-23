@@ -1,6 +1,7 @@
 const cheerio         = require('cheerio');
-const Alignment   = require('../alignment/alignment.class');
-const Color     = require('../color/color.class');
+const Alignment       = require('../alignment/alignment.class');
+const Color           = require('../color/color.class');
+const Sources         = require('../sources/sources.class');
 const Style           = require('../style/style.class');
 const AllowedHtmlTags = require('../allowed-html-tags/allowed-html-tags.class');
 const Table           = require('../table/table.class');
@@ -133,7 +134,7 @@ class Rtf {
       this.addReferenceTagInRtfCode(Alignment.getRtfAlignmentReference(attributes.align));
     }
     if(attributes.src !== undefined) {
-      this.addReferenceTagInRtfCode(Style.getRtfSourceReference(attributes.src));
+      this.addReferenceTagInRtfCode(Sources.getRtfSourcesReference(attributes.src, attributes.style));
   }
     }
 

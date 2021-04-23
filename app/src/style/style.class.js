@@ -1,7 +1,6 @@
 const cheerio   = require('cheerio');
 const $         = cheerio.load('');
 const Color     = require('../color/color.class');
-const Sources   = require('../sources/sources.class');
 const AllowedStyleProperties = require('../allowed-style-properties/allowed-style-properties.class');
 
 class Style {
@@ -10,8 +9,9 @@ class Style {
     return Color.getRtfColorTable();
   }
 
-  static getRtfSourceReference(value) {
-    return Sources.getRtfSourcesReference(value);
+  static getStyleValueOfProperty(styleValue, property) {
+      const fictitiousTagWithTruthStyle = `<span style="${styleValue}"></span>`;
+      return $(fictitiousTagWithTruthStyle).css(property)
   }
 
     static getRtfReferencesInStyleProperty(styleValue) {
@@ -19,18 +19,17 @@ class Style {
             return undefined;
         }
 
-        let fictitiousTagWithTruthStyle = `<span style="${styleValue}"></span>`;
         let listOfRtfReferences = '';
         let allowedTags = AllowedStyleProperties.getAllowedTags();
 
         allowedTags.forEach(value => {
-            if ($(fictitiousTagWithTruthStyle).css(value.propertyName) !== undefined) {
-                if (value.transform !== undefined) {
-                    const styleTag = value.getSpecificStyleTag !== undefined ?
-                        value.getSpecificStyleTag(styleValue) :
-                        fictitiousTagWithTruthStyle;
-                    listOfRtfReferences += value.transform($(styleTag).css(value.propertyName));;
+            let styleValueFromProperty = Style.getStyleValueOfProperty(styleValue, value.propertyName);
+            if (styleValueFromProperty !== undefined && value.transform !== undefined) {
+                if ( value.getSpecificStyleTag !== undefined ) {
+                    const styleTag = value.getSpecificStyleTag(styleValue);
+                    styleValueFromProperty = $(styleTag).css(value.propertyName);
                 }
+                listOfRtfReferences += value.transform(styleValueFromProperty);
             }
         });
 
