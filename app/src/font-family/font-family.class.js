@@ -28,11 +28,7 @@ class FontFamily {
             {
                 fontFamily: 'Verdana',
                 rtfChar: '\\f6'
-            },
-            {
-                fontFamily: 'Segoe UI',
-                rtfChar: '\\f7' // Assign a new RTF reference for Segoe UI
-            }
+            },           
         ];
 
         if (value) {
