@@ -1,9 +1,9 @@
 const FONT_SIZE_RTF_REFERENCE = "\\fs";
 const ONE_PIXEL_IN_POINT = 0.75;
 const NAMED_FONT_SIZES = {
-    medium: "10px",
-    larger: "10px",
-    smaller: "10px"
+    medium: "14px",
+    larger: "16px",
+    smaller: "12px"
 };
 
 class FontSize {
