@@ -28,7 +28,7 @@ class FontFamily {
             {
                 fontFamily: 'Verdana',
                 rtfChar: '\\f6'
-            },           
+            }           
         ];
 
         if (value) {
