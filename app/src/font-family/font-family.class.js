@@ -28,7 +28,11 @@ class FontFamily {
             {
                 fontFamily: 'Verdana',
                 rtfChar: '\\f6'
-            }           
+            },
+            {
+                fontFamily: 'Segoe UI',
+                rtfChar: '\\f7'
+            }  
         ];
 
         if (value) {
